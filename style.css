@@ -1,0 +1,2103 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 90vh;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* =============================================
+   CSS Variables
+   ============================================= */
+:root {
+  --Building-color: #faa177;
+  --Building-ShadowSide-color: #b67054;
+  --RoofBar-color: #b5c175;
+  --WindowBorder-color: #fccf5d;
+  --WindowGlass-color: #665581;
+  --SignInner-color: #f87178;
+  --SignInnerShadow-color: #c15273;
+  --SignBorder-color: #fdbcc2;
+  --border-Delete: 2px solid transparent;
+  --Sedan-color: #6dbdb9;
+  --SWheel-color: #559491;
+  --Van-color: #6dbdb9;
+  --Wheel-color: #559491;
+}
+
+/* =============================================
+   Media Controls
+   ============================================= */
+.section {
+  bottom: 0;
+  position: absolute;
+  min-height: 10vh;
+  width: 100%;
+  background: #fbe4c5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section .ContainerBox i {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1vmin;
+  width: 5vmin;
+  height: 5vmin;
+  background: rgba(0, 0, 0);
+  border-radius: 1vmin;
+  box-shadow: 0.5vmin 0.5vmin 2vmin 0.2vmin #000000;
+  font-size: 3vmin;
+  cursor: pointer;
+  color: white;
+}
+
+.section .ContainerBox i:hover {
+  color: rgb(2, 209, 2);
+  box-shadow: inset 1vmin 1vmin 3vmin -1vmin #000000;
+}
+
+.ContainerBox.play,
+.ContainerBox.pause {
+  visibility: visible;
+}
+
+/* =============================================
+   Background (Sky + Land + Road)
+   ============================================= */
+.DWSky {
+  position: absolute;
+  height: 100vh;
+  min-width: 100%;
+  background: linear-gradient(
+    177deg,
+    rgba(253, 227, 214, 1) 0%,
+    rgba(251, 234, 218, 1) 18%,
+    rgba(249, 245, 220, 1) 85%
+  );
+  top: 0;
+  z-index: -2;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.DWLand {
+  position: relative;
+  height: 70px;
+  min-width: 100%;
+  background: #fbe4c5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-shadow: 1px -10px 0px -5px #c0aba4 inset;
+}
+
+.DWRoad {
+  position: relative;
+  height: 30px;
+  min-width: 100%;
+  background: #9a849b;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.DWRoad::after {
+  content: "";
+  min-width: 100%;
+  min-height: 2px;
+  background: linear-gradient(
+    90deg,
+    white,
+    white 50%,
+    transparent 50%,
+    transparent 100%
+  );
+  background-size: 5vmin;
+}
+
+.WrapAllObjectDiv {
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  z-index: 1;
+  background: rgba(255, 0, 0, 0);
+  display: flex;
+  justify-content: center;
+}
+
+/* =============================================
+   Typography
+   ============================================= */
+h1,
+h2,
+h3 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 1rem;
+  margin: 10px;
+}
+
+h3 {
+  font-size: 2rem;
+  text-shadow: none;
+}
+
+.neonText {
+  color: #fdd679;
+  text-shadow: #e4a30a 0px 0px 5px;
+}
+
+/* =============================================
+   Restaurant
+   ============================================= */
+.RContainer {
+  position: absolute;
+  border: var(--border-Delete);
+  height: 400px;
+  width: 900px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  scale: 0.5;
+  bottom: -40px;
+}
+
+.RFoundationStart {
+  position: absolute;
+  height: 22px;
+  width: 170px;
+  background: linear-gradient(to right, #d5c0bf 96%, #927b8f 0%);
+  left: 0px;
+  bottom: 0px;
+}
+
+/* Right Foundation Slab */
+.RFoundationStart::before {
+  position: absolute;
+  content: "";
+  height: 25px;
+  width: 350px;
+  background: linear-gradient(to right, #d5c0bf 51%, #927b8f 0%);
+  left: 250px;
+}
+
+.RbodyStart {
+  position: absolute;
+  height: 120px;
+  width: 600px;
+  background: var(--Building-color);
+  right: 30px;
+  bottom: 0px;
+  z-index: -1;
+}
+
+.RbodyStart::before {
+  position: absolute;
+  content: "";
+  height: 120px;
+  width: 180px;
+  background: var(--Building-ShadowSide-color);
+  filter: brightness(75%);
+  right: 0px;
+  bottom: 0px;
+  z-index: -1;
+}
+
+.RbodyWindowsL {
+  position: absolute;
+  height: 80px;
+  width: 60px;
+  background: var(--WindowGlass-color);
+  top: 19px;
+  left: 10px;
+  border: 5px solid var(--WindowBorder-color);
+}
+
+.RbodyWindowsML {
+  position: absolute;
+  height: 80px;
+  width: 60px;
+  background: var(--WindowGlass-color);
+  top: 19px;
+  left: 85px;
+  border: 5px solid var(--WindowBorder-color);
+}
+
+.glassWindowDoorFrame {
+  position: absolute;
+  height: 100px;
+  width: 80px;
+  background: var(--WindowGlass-color);
+  top: 19px;
+  left: 168px;
+  border: 5px solid var(--WindowBorder-color);
+  overflow: hidden;
+}
+
+.glassWindowDoorFrame::before {
+  position: absolute;
+  content: "";
+  height: 100px;
+  width: 10px;
+  background: var(--WindowBorder-color);
+  right: 30px;
+}
+
+.glassWindowDoorFrame::after {
+  position: absolute;
+  content: "";
+  height: 100px;
+  width: 6px;
+  background: var(--WindowBorder-color);
+  right: 33px;
+  rotate: 90deg;
+}
+
+.RbodyWindowsMR {
+  position: absolute;
+  height: 80px;
+  width: 60px;
+  background: var(--WindowGlass-color);
+  top: 19px;
+  left: 265px;
+  border: 5px solid var(--WindowBorder-color);
+}
+
+.raindripguardShadow {
+  position: absolute;
+  height: 120px;
+  width: 125px;
+  background: rgba(0, 0, 0, 0.411);
+  top: 10px;
+  left: 165px;
+  clip-path: polygon(0 0, 75% 0, 100% 100%, 25% 100%);
+}
+
+.RbodyStartFrontShadow {
+  position: absolute;
+  height: 35px;
+  width: 260px;
+  background: rgba(0, 0, 0, 0.411);
+}
+
+.RbodyStartFrontShadow::before {
+  content: "";
+  position: absolute;
+  height: 35px;
+  width: 150px;
+  background: rgba(0, 0, 0, 0.411);
+  left: 270px;
+}
+
+.RbodyStartFrontShadow::after {
+  content: "";
+  position: absolute;
+  height: 53px;
+  width: 20px;
+  background: rgba(0, 0, 0, 0.411);
+  left: 250px;
+  clip-path: polygon(50% 0%, 100% 0, 100% 100%, 50% 29%);
+}
+
+.RbodyWindowsR {
+  position: absolute;
+  height: 80px;
+  width: 60px;
+  background: var(--WindowGlass-color);
+  top: 19px;
+  left: 340px;
+  border: 5px solid var(--WindowBorder-color);
+}
+
+.RbodyWindowsRSS {
+  position: absolute;
+  height: 80px;
+  width: 70px;
+  background: var(--WindowGlass-color);
+  top: 19px;
+  border: 6px solid #a57c16;
+  transform: scale(0.51, 0.92) skewX(-7deg);
+  left: 440px;
+}
+
+.RroofStart {
+  position: absolute;
+  height: 20px;
+  width: 660px;
+  background: linear-gradient(to right, var(--RoofBar-color) 65%, #9ba664 0%);
+  right: 30px;
+  bottom: 120px;
+  z-index: 1;
+}
+
+.RroofStart::before {
+  position: absolute;
+  content: "";
+  height: 35px;
+  width: 115px;
+  background: linear-gradient(to top, var(--RoofBar-color) 60%, #9ba664 0%);
+  clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
+  top: 24px;
+  left: 175px;
+  filter: brightness(105%);
+}
+
+.RroofStart::after {
+  position: absolute;
+  content: "";
+  height: 35px;
+  width: 10px;
+  background: #9ba664;
+  clip-path: polygon(100% 0, 0% 100%, 100% 100%);
+  top: 25px;
+  left: 280px;
+}
+
+.RroofStartHead {
+  position: absolute;
+  height: 120px;
+  width: 520px;
+  background: var(--Building-color);
+  clip-path: polygon(15% 0%, 100% 0, 100% 100%, 0% 100%);
+  right: 130px;
+  bottom: 135px;
+}
+
+/* Signs */
+.signs {
+  position: absolute;
+  width: 425px;
+  height: 230px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  right: 250px;
+  top: 45px;
+  z-index: 1;
+}
+
+.signs::after {
+  content: "";
+  position: absolute;
+  width: 450px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.411);
+  bottom: 18px;
+  left: 90px;
+  clip-path: polygon(15% 0%, 80% 0%, 75% 100%, 0% 100%);
+  z-index: -1;
+}
+
+.Ncontainer {
+  position: absolute;
+  top: 60px;
+  left: 123px;
+  z-index: 3;
+}
+
+.RroofStartSignsLegs {
+  position: absolute;
+  height: 20px;
+  width: 8px;
+  background: #303030;
+  box-shadow:
+    40px 0px 0px rgba(0, 0, 0),
+    90px 0px 0px rgb(0, 0, 0),
+    140px 0px 0px rgba(0, 0, 0),
+    190px 0px 0px rgba(0, 0, 0),
+    240px 0px 0px rgba(0, 0, 0),
+    290px 0px 0px rgba(0, 0, 0);
+  bottom: 17px;
+  left: 65px;
+}
+
+.RroofStartSignsB {
+  position: absolute;
+  height: 60px;
+  width: 400px;
+  bottom: 30px;
+  background: var(--SignInnerShadow-color);
+  overflow: hidden;
+  border: 7px solid var(--SignBorder-color);
+}
+
+.RroofStartSignsB::before {
+  content: "";
+  position: absolute;
+  height: 60px;
+  width: 400px;
+  background: var(--SignInner-color);
+  left: 5px;
+  top: 8px;
+}
+
+.RroofStartSignsBLight {
+  position: absolute;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  top: 15px;
+  left: 10px;
+  box-shadow:
+    0 0 0.2rem #fff,
+    0 0 0.2rem #fff,
+    0 0 2rem #fce832,
+    0 0 0.8rem #fce832,
+    0 0 2.8rem #fce832,
+    inset 0 0 1.3rem #f3de1f;
+}
+
+.RroofStartSignsBLight:nth-child(1) {
+  left: 40px;
+}
+.RroofStartSignsBLight:nth-child(2) {
+  left: 70px;
+}
+.RroofStartSignsBLight:nth-child(3) {
+  left: 300px;
+}
+.RroofStartSignsBLight:nth-child(4) {
+  left: 330px;
+}
+.RroofStartSignsBLight:nth-child(5) {
+  left: 360px;
+}
+
+/* Flickering light on hover */
+.RroofStartSignsBLight:hover {
+  box-shadow: none;
+}
+
+.RroofStartSignsBLineCover {
+  position: absolute;
+  height: 25px;
+  width: 266px;
+  bottom: 75px;
+  background: var(--SignInner-color);
+  z-index: 2;
+  border-left: 7px solid var(--SignInnerShadow-color);
+}
+
+.RroofStartSignsMB {
+  position: absolute;
+  height: 30px;
+  width: 280px;
+  bottom: 85px;
+  background: var(--SignInnerShadow-color);
+  overflow: hidden;
+  border: 7px solid var(--SignBorder-color);
+}
+
+.RroofStartSignsMB::before {
+  content: "";
+  position: absolute;
+  height: 60px;
+  width: 40px;
+  background: var(--SignInner-color);
+  left: 7px;
+  top: 5px;
+}
+
+.RroofStartSignsMBLineCover {
+  position: absolute;
+  height: 25px;
+  width: 175px;
+  bottom: 100px;
+  background: var(--SignInner-color);
+  z-index: 2;
+  border-left: 7px solid var(--SignInnerShadow-color);
+}
+
+.RroofStartSignsMT {
+  position: absolute;
+  height: 30px;
+  width: 190px;
+  bottom: 110px;
+  background: var(--SignInnerShadow-color);
+  overflow: hidden;
+  border: 7px solid var(--SignBorder-color);
+}
+
+.RroofStartSignsMT::before {
+  content: "";
+  position: absolute;
+  height: 60px;
+  width: 400px;
+  background: var(--SignInner-color);
+  left: 5px;
+  top: 5px;
+}
+
+.RroofStartSignsMTLineCover {
+  position: absolute;
+  height: 25px;
+  width: 105px;
+  bottom: 120px;
+  background: var(--SignInner-color);
+  z-index: 2;
+  border-left: 7px solid var(--SignInnerShadow-color);
+}
+
+.RroofStartSignsT {
+  position: absolute;
+  height: 60px;
+  width: 120px;
+  bottom: 135px;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+  background: var(--SignInnerShadow-color);
+  overflow: hidden;
+  border: 7px solid var(--SignBorder-color);
+}
+
+.RroofStartSignsT::before {
+  content: "";
+  position: absolute;
+  height: 60px;
+  width: 100px;
+  background: var(--SignInner-color);
+  left: 5px;
+  top: 5px;
+  border-top-left-radius: 100px;
+  border-top-right-radius: 100px;
+}
+
+.RroofStartSignsTSC {
+  position: absolute;
+  height: 60px;
+  width: 150px;
+  background: var(--SignInner-color);
+  bottom: 68px;
+  z-index: 2;
+}
+
+.RroofStartHeadShadowPart {
+  position: absolute;
+  height: 115px;
+  width: 175px;
+  background: var(--Building-ShadowSide-color);
+  filter: brightness(95%);
+  clip-path: polygon(5% 1%, 70% 0%, 100% 100%, 0% 100%);
+  right: 35px;
+  bottom: 140px;
+  z-index: 1;
+}
+
+.RroofEndHead {
+  position: absolute;
+  height: 15px;
+  width: 485px;
+  background: linear-gradient(to right, #eae9ee 76.5%, #b1a4ad 0%);
+  right: 87px;
+  bottom: 255px;
+  box-shadow: rgba(29, 29, 29, 0.5) 1px 5px 5px;
+}
+
+.RroofEndHead::before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 290px;
+  background: linear-gradient(to right, #eae9ee 90%, #b1a4ad 0%);
+  bottom: 15px;
+  right: 140px;
+}
+
+.RroofEndHead::after {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 210px;
+  background: linear-gradient(to right, #eae9ee 90%, #b1a4ad 0%);
+  bottom: 28px;
+  right: 175px;
+}
+
+.acUnit1 {
+  position: absolute;
+  height: 40px;
+  width: 70px;
+  background: linear-gradient(to left, #bebec0 75%, #8d737e 0%);
+  top: 10px;
+  right: 5px;
+  transform: scale(0.51, 0.92) skewX(-7deg);
+  clip-path: polygon(10% 0, 98% 0%, 100% 96%, 0% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.acUnit2 {
+  position: absolute;
+  height: 40px;
+  width: 70px;
+  background: linear-gradient(to left, #bebec0 75%, #8d737e 0%);
+  top: 50px;
+  right: 7px;
+  transform: scale(0.51, 0.92) skewX(-7deg);
+  clip-path: polygon(10% 0, 98% 0%, 100% 96%, 0% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Shared circle styles for AC units */
+.acUnit1 .circleP,
+.acUnit2 .circleP2 {
+  position: absolute;
+  width: 40px;
+  height: 35px;
+  border-radius: 50%;
+  background: black;
+  right: 7px;
+}
+
+.acUnit1 .circleP::before,
+.acUnit2 .circleP2::before {
+  content: "";
+  position: absolute;
+  width: 40px;
+  height: 35px;
+  border-radius: 50%;
+  background: #bebec0;
+  scale: 0.4;
+}
+
+.AcWire {
+  position: absolute;
+  width: 5px;
+  height: 75px;
+  background: black;
+  right: 70px;
+}
+
+.AcWire::before {
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 5px;
+  background: black;
+  top: 30px;
+}
+
+.AcWire::after {
+  position: absolute;
+  content: "";
+  width: 30px;
+  height: 5px;
+  background: black;
+  top: 70px;
+}
+
+/* =============================================
+   Civilian Car
+   ============================================= */
+.CsedanContainer {
+  position: absolute;
+  border: var(--border-Delete);
+  height: 300px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  scale: 0.5;
+  bottom: -130px;
+  left: -150px;
+  transform: rotateY(0deg);
+  transform-style: preserve-3d;
+  will-change: left, transform;
+  z-index: 999;
+}
+
+.CsedanContainer::before {
+  content: "";
+  position: absolute;
+  background: #534947c0;
+  height: 3px;
+  width: 220px;
+  bottom: 115px;
+  right: 10px;
+  z-index: 999;
+}
+
+.CsMainBodyTop {
+  position: absolute;
+  height: 70px;
+  width: 152px;
+  background: var(--Sedan-color);
+  top: 60px;
+  right: 81px;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.CsMainBodyTop::before {
+  position: absolute;
+  content: "";
+  height: 60px;
+  width: 40px;
+  background: #68587f;
+  clip-path: polygon(0 0, 37% 0, 100% 100%, 50% 100%);
+  border: var(--border-Delete);
+  right: 8px;
+  top: 4px;
+  box-shadow: inset 10px 0 20px #000000;
+}
+
+.CsMainBodyTop::after {
+  position: absolute;
+  content: "";
+  height: 60px;
+  width: 90px;
+  background: #68587f;
+  clip-path: polygon(23% 0%, 74% 0%, 95% 100%, 0% 100%);
+  border: var(--border-Delete);
+  right: 30px;
+  top: 4px;
+  box-shadow: inset 40px 0 40px #000000;
+}
+
+.CsMainBody {
+  position: relative;
+  height: 50px;
+  width: 170px;
+  background: var(--Sedan-color);
+  border-radius: 0px 10px 10px 10px;
+}
+
+.CsMainBody::before {
+  position: absolute;
+  content: "";
+  height: 5px;
+  width: 30px;
+  background: var(--Sedan-color);
+  right: 80px;
+  top: 10px;
+  z-index: 2;
+  box-shadow: rgba(0, 0, 0) 2px 2px 2px;
+}
+
+.CsMainBody::after {
+  position: absolute;
+  content: "";
+  height: 35px;
+  width: 10px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 166, 0, 0.9) 33%,
+    rgba(255, 0, 0, 0.8) 33%
+  );
+  left: -3px;
+  top: 0px;
+  border: var(--border-Delete);
+  z-index: 2;
+}
+
+.CsMainBodyFront {
+  position: absolute;
+  height: 55px;
+  width: 60px;
+  background: var(--Sedan-color);
+  right: 30px;
+  top: 118px;
+  clip-path: polygon(0 0, 100% 14%, 100% 100%, 0 100%);
+}
+
+.CsMainBodyFront::before {
+  position: absolute;
+  content: "";
+  height: 55px;
+  width: 23px;
+  background: #3d344b;
+  right: -10px;
+  z-index: 1;
+}
+
+.CheadLights {
+  position: absolute;
+  height: 20px;
+  width: 5px;
+  background: #ffffff;
+  right: 5px;
+  z-index: 1;
+  border: var(--border-Delete);
+}
+
+.CheadLights::before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 5px;
+  background: #ffffff;
+  right: -7px;
+  top: -2px;
+  z-index: 1;
+  border: var(--border-Delete);
+}
+
+.CheadLights::after {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 15px;
+  background: #ffffff;
+  top: 35px;
+  right: -8.5px;
+  z-index: 1;
+  border: var(--border-Delete);
+}
+
+/* Shared wheel base styles */
+.CsWheelsF,
+.CsWheelsB,
+.PsWheelsF,
+.PsWheelsB {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  z-index: 5;
+  bottom: 110px;
+  border-radius: 50%;
+  animation: Wheelmove 0.5s infinite linear;
+}
+
+.CsWheelsF,
+.CsWheelsB {
+  background: #4a293c;
+}
+
+.CsWheelsF {
+  right: 45px;
+}
+.CsWheelsB {
+  left: 75px;
+}
+
+.CsWheelsF::before,
+.CsWheelsB::before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  background: var(--SWheel-color);
+  border-radius: 50%;
+  transform: scale(0.7);
+  filter: brightness(90%);
+}
+
+.CsWheelsF::after,
+.CsWheelsB::after {
+  position: absolute;
+  content: "* * * *";
+  color: rgb(0, 0, 0);
+  line-height: 23px;
+  word-break: break-word;
+  font-size: 22px;
+  text-align: center;
+  font-weight: bold;
+  height: 40px;
+  width: 40px;
+  background: #fbe9d1;
+  border-radius: 50%;
+  transform: scale(0.4);
+}
+
+/* Subsequent cars color variant */
+.CsedanContainer:nth-child(2) .CsMainBody,
+.CsedanContainer:nth-child(2) .CsMainBodyFront,
+.CsedanContainer:nth-child(2) .CsMainBodyTop {
+  background: #eed475;
+}
+
+.CsedanContainer:nth-child(2) .CsWheelsB::before,
+.CsedanContainer:nth-child(2) .CsWheelsF::before {
+  background: #eed475;
+  filter: brightness(80%);
+}
+
+/* =============================================
+   Police Car
+   ============================================= */
+.PsedanContainer {
+  position: absolute;
+  border: var(--border-Delete);
+  height: 300px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  scale: 0.5;
+  bottom: -130px;
+  left: -350px;
+  transform: rotateY(0deg);
+  transform-style: preserve-3d;
+  will-change: left, transform;
+  z-index: 999;
+}
+
+.PsedanContainer::before {
+  content: "";
+  position: absolute;
+  background: #534947c0;
+  height: 3px;
+  width: 235px;
+  bottom: 110px;
+  right: 10px;
+  z-index: -1;
+}
+
+.PsedanContainer::after {
+  content: "Police";
+  position: absolute;
+  bottom: 110px;
+  right: 120px;
+  top: 145px;
+  color: white;
+  font-family: sans-serif;
+  font-size: 20px;
+}
+
+.PsirenSupportbar {
+  position: absolute;
+  height: 10px;
+  width: 5px;
+  background: #202020;
+  left: 110px;
+  top: 50px;
+  z-index: -1;
+  box-shadow:
+    18px 0px 0px #202020,
+    36px 0px 0px #202020;
+}
+
+.PsirenSupportbar::before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 50px;
+  background: #202020;
+  top: -2px;
+  left: -5px;
+}
+
+.PsirenSupportbar::after {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 20px;
+  background: #7a7575;
+  top: -8px;
+  left: 10px;
+}
+
+.PsirenLightRed {
+  position: absolute;
+  height: 10px;
+  width: 20px;
+  background: #fc0000;
+  box-shadow: 0px 0px 20px 10px red;
+  left: -10px;
+  top: -8px;
+  animation: sirenlightRedBeam 0.65s infinite linear;
+}
+
+.PsirenLightBlue {
+  position: absolute;
+  height: 10px;
+  width: 20px;
+  background: #2600ff;
+  box-shadow: 0px 0px 20px 10px #2600ff;
+  left: 30px;
+  top: -8px;
+  animation: sirenlightBlueBeam 0.6s infinite linear;
+}
+
+.PsMainBodyTop {
+  position: absolute;
+  height: 70px;
+  width: 152px;
+  background: #383636;
+  top: 60px;
+  right: 81px;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  overflow: hidden;
+  z-index: -1;
+}
+
+.PsMainBodyTop::before {
+  position: absolute;
+  content: "";
+  height: 60px;
+  width: 40px;
+  background: #68587f;
+  clip-path: polygon(0 0, 37% 0, 100% 100%, 50% 100%);
+  border: 2px solid black;
+  right: 8px;
+  top: 4px;
+  box-shadow: inset 10px 0 20px #000000;
+}
+
+.PsMainBodyTop::after {
+  position: absolute;
+  content: "";
+  height: 60px;
+  width: 110px;
+  background: #68587f;
+  clip-path: polygon(23% 0%, 74% 0%, 95% 100%, 0% 100%);
+  border: 2px solid black;
+  right: 30px;
+  top: 4px;
+  box-shadow: inset 40px 0 40px #000000;
+}
+
+.PsMainBody {
+  position: relative;
+  height: 50px;
+  width: 200px;
+  background: #383636;
+  border-radius: 0px 10px 10px 10px;
+}
+
+.PsMainBody::after {
+  position: absolute;
+  content: "";
+  height: 35px;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 166, 0, 0.9) 33%,
+    rgba(255, 0, 0, 0.8) 33%
+  );
+  left: -3px;
+  top: 0px;
+  border: 0.3px solid black;
+  z-index: 2;
+}
+
+.PdoorHandles {
+  position: absolute;
+  height: 5px;
+  width: 30px;
+  background: #555252;
+  right: 123px;
+  top: 130px;
+  z-index: 2;
+  box-shadow: rgba(0, 0, 0) 2px 2px 2px;
+  border-radius: 10px 0 0 10px;
+}
+
+.PdoorHandles::before {
+  position: absolute;
+  content: "";
+  height: 5px;
+  width: 30px;
+  background: #555252;
+  right: 55px;
+  z-index: 2;
+  box-shadow: rgba(0, 0, 0) 2px 2px 2px;
+  border-radius: 10px 0 0 10px;
+}
+
+.PdoorHandles::after {
+  position: absolute;
+  content: "";
+  height: 60px;
+  width: 5px;
+  background: #383636;
+  right: 40px;
+  bottom: 12px;
+  z-index: 2;
+  box-shadow:
+    rgba(223, 2, 2, 0.9) -10px 0px 50px 10px,
+    #2600ff 10px 0px 50px 5px;
+}
+
+.PsMainBodyFront {
+  position: absolute;
+  height: 55px;
+  width: 60px;
+  background: #383636;
+  right: 30px;
+  top: 118px;
+  clip-path: polygon(0 0, 100% 14%, 100% 100%, 0 100%);
+}
+
+.PsMainBodyFront::before {
+  position: absolute;
+  content: "";
+  height: 55px;
+  width: 23px;
+  background: #3d344b;
+  right: -10px;
+  z-index: 1;
+}
+
+.PheadLights {
+  position: absolute;
+  height: 20px;
+  width: 5px;
+  background: #ffffff;
+  right: 5px;
+  z-index: 1;
+  border: 2px solid black;
+}
+
+.PheadLights::before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 5px;
+  background: #ffffff;
+  right: -7px;
+  top: -2px;
+  z-index: 1;
+  border: 2px solid black;
+}
+
+.PheadLights::after {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 15px;
+  background: #ffffff;
+  top: 35px;
+  right: -8.5px;
+  z-index: 1;
+  border: 2px solid black;
+}
+
+.PsWheelsF,
+.PsWheelsB {
+  background: #202020;
+}
+
+.PsWheelsF {
+  right: 45px;
+}
+.PsWheelsB {
+  left: 75px;
+}
+
+.PsWheelsF::before,
+.PsWheelsB::before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  background: #383636;
+  border-radius: 50%;
+  transform: scale(0.7);
+}
+
+.PsWheelsF::after,
+.PsWheelsB::after {
+  position: absolute;
+  content: "* * * *";
+  color: rgb(0, 0, 0);
+  line-height: 23px;
+  word-break: break-word;
+  font-size: 22px;
+  text-align: center;
+  font-weight: bold;
+  height: 40px;
+  width: 40px;
+  background: silver;
+  border-radius: 50%;
+  transform: scale(0.4);
+}
+
+/* =============================================
+   Ice Cream Van (Player-controlled)
+   ============================================= */
+.IsedanContainer {
+  position: absolute;
+  border: var(--border-Delete);
+  height: 300px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  scale: 0.5;
+  bottom: -130px;
+  right: calc(50% - 100px);
+  transform: rotateY(0deg);
+  z-index: 100;
+}
+
+.IsedanContainer::before {
+  content: "";
+  position: absolute;
+  background: #534947c0;
+  height: 3px;
+  width: 220px;
+  bottom: 110px;
+  right: 10px;
+  z-index: -1;
+}
+
+.IsMainBodyTop {
+  position: absolute;
+  height: 70px;
+  width: 152px;
+  background: var(--Van-color);
+  top: 60px;
+  right: 81px;
+  clip-path: polygon(0 0, 80% 0%, 100% 100%, 0% 100%);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.IsMainBodyTop::before {
+  position: absolute;
+  content: "";
+  height: 60px;
+  width: 40px;
+  background: #68587f;
+  clip-path: polygon(0 0, 37% 0, 100% 100%, 50% 100%);
+  border: 2px solid black;
+  right: 8px;
+  top: 4px;
+  box-shadow: inset 10px 0 20px #000000;
+}
+
+.IsMainBodyTop::after {
+  position: absolute;
+  content: "";
+  height: 60px;
+  width: 60px;
+  background: #68587f;
+  clip-path: polygon(0 0, 65% 0%, 100% 100%, 0% 100%);
+  border: 2px solid black;
+  right: 32px;
+  top: 4px;
+  box-shadow: inset 40px 0 40px #000000;
+}
+
+.IVanText {
+  position: absolute;
+  height: 80%;
+  width: 50px;
+  background: url("Icecream.png") repeat 0 0;
+  background-size: 100%;
+  transform: rotate(-30deg);
+  top: 5px;
+  left: 5px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.IsMainBody {
+  position: relative;
+  height: 50px;
+  width: 170px;
+  background: var(--Van-color);
+  border-radius: 0px 10px 10px 10px;
+}
+
+.IsMainBody::before {
+  position: absolute;
+  content: "";
+  height: 5px;
+  width: 30px;
+  background: var(--Van-color);
+  right: 80px;
+  top: 10px;
+  z-index: 2;
+  box-shadow: rgba(0, 0, 0) 2px 2px 2px;
+  filter: brightness(70%);
+  border-radius: 10px 0 0 10px;
+}
+
+.IsMainBody::after {
+  position: absolute;
+  content: "";
+  height: 35px;
+  width: 10px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 166, 0, 0.9) 33%,
+    rgba(255, 0, 0, 0.8) 33%
+  );
+  left: -3px;
+  top: 0px;
+  border: 2px solid black;
+  z-index: 2;
+}
+
+.IsMainBodyFront {
+  position: absolute;
+  height: 55px;
+  width: 60px;
+  background: var(--Van-color);
+  right: 30px;
+  top: 118px;
+  clip-path: polygon(0 0, 100% 14%, 100% 100%, 0 100%);
+}
+
+.IsMainBodyFront::before {
+  position: absolute;
+  content: "";
+  height: 55px;
+  width: 23px;
+  background: #3d344b;
+  right: -10px;
+  z-index: 1;
+}
+
+.IheadLights {
+  position: absolute;
+  height: 20px;
+  width: 5px;
+  background: #ffffff;
+  right: 5px;
+  z-index: 1;
+  border: 2px solid black;
+}
+
+.IheadLights::before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 5px;
+  background: #ffffff;
+  right: -7px;
+  top: -2px;
+  z-index: 1;
+  border: 2px solid black;
+}
+
+.IheadLights::after {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 15px;
+  background: #ffffff;
+  top: 35px;
+  right: -8.5px;
+  z-index: 1;
+  border: 2px solid black;
+}
+
+.IsWheelsF,
+.IsWheelsB {
+  position: absolute;
+  height: 40px;
+  width: 40px;
+  background: #4a293c;
+  z-index: 5;
+  bottom: 110px;
+  border-radius: 50%;
+  animation: Wheelmove 0.5s infinite linear;
+}
+
+.IsWheelsF {
+  right: 45px;
+}
+.IsWheelsB {
+  left: 75px;
+}
+
+.IsWheelsF::before,
+.IsWheelsB::before {
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  background: var(--Wheel-color);
+  border-radius: 50%;
+  transform: scale(0.7);
+}
+
+.IsWheelsF::after,
+.IsWheelsB::after {
+  position: absolute;
+  content: "* * * *";
+  color: rgb(0, 0, 0);
+  line-height: 23px;
+  word-break: break-word;
+  font-size: 22px;
+  text-align: center;
+  font-weight: bold;
+  height: 40px;
+  width: 40px;
+  background: #fbe9d1;
+  border-radius: 50%;
+  transform: scale(0.4);
+}
+
+.IsedanContainer:nth-child(2) .IsMainBody,
+.IsedanContainer:nth-child(2) .IsMainBodyFront,
+.IsedanContainer:nth-child(2) .IsMainBodyTop,
+.IsedanContainer:nth-child(2) .IsWheelsB::before,
+.IsedanContainer:nth-child(2) .IsWheelsF::before {
+  background: #eed475;
+}
+
+/* =============================================
+   Trees
+   ============================================= */
+.fcontainer {
+  position: absolute;
+  border: var(--border-Delete);
+  height: 300px;
+  width: 3000px;
+  display: flex;
+  align-items: flex-end;
+  z-index: 1;
+  bottom: 30px;
+  left: calc(50% - 1200px);
+}
+
+.tContainer {
+  position: absolute;
+  border: var(--border-Delete);
+  height: 150px;
+  width: 300px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  left: calc(0% - 0px);
+}
+
+.tTrunk {
+  position: absolute;
+  background: #5b484e;
+  width: 13px;
+  height: 60px;
+  right: 135px;
+}
+
+.tTrunk::before {
+  position: absolute;
+  content: "";
+  background: #000000;
+  width: 160px;
+  height: 5px;
+  bottom: -2px;
+  left: -10px;
+  clip-path: polygon(25% 0%, 100% 0%, 75% 100%, 0% 100%);
+  z-index: -1;
+}
+
+.tLeafGreenSide {
+  position: absolute;
+  background: #c7d17b;
+  width: 40px;
+  height: 100px;
+  bottom: 40px;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.tLeafShadowSide {
+  position: absolute;
+  background: #5c6139;
+  width: 40px;
+  height: 100px;
+  bottom: 40px;
+  right: 108px;
+  clip-path: polygon(0 0, 45% 100%, 90% 100%);
+}
+
+.tContainer:nth-of-type(1) {
+  position: absolute;
+  left: 150px;
+  bottom: 70px;
+  scale: 1.4;
+}
+.tContainer:nth-of-type(2) {
+  position: absolute;
+  left: 100px;
+  bottom: 20px;
+  scale: 1.1;
+}
+.tContainer:nth-of-type(3) {
+  position: absolute;
+  left: 250px;
+  bottom: 60px;
+  scale: 1.6;
+}
+.tContainer:nth-of-type(4) {
+  position: absolute;
+  left: 350px;
+  bottom: 50px;
+  scale: 1.1;
+}
+.tContainer:nth-of-type(5) {
+  position: absolute;
+  left: 400px;
+  bottom: 50px;
+  scale: 1.6;
+}
+.tContainer:nth-of-type(6) {
+  position: absolute;
+  left: 550px;
+  bottom: 60px;
+  scale: 1.4;
+}
+.tContainer:nth-of-type(7) {
+  position: absolute;
+  left: 700px;
+  bottom: 0px;
+  scale: 1;
+}
+.tContainer:nth-of-type(8) {
+  position: absolute;
+  left: 1300px;
+  bottom: 60px;
+  scale: 1;
+}
+.tContainer:nth-of-type(9) {
+  position: absolute;
+  left: 1350px;
+  bottom: 10px;
+  scale: 1;
+}
+.tContainer:nth-of-type(10) {
+  position: absolute;
+  left: 1400px;
+  bottom: 5px;
+  scale: 0.6;
+}
+.tContainer:nth-of-type(11) {
+  position: absolute;
+  left: 1550px;
+  bottom: 35px;
+  scale: 1;
+}
+.tContainer:nth-of-type(12) {
+  position: absolute;
+  left: 1650px;
+  bottom: 10px;
+  scale: 0.5;
+}
+.tContainer:nth-of-type(13) {
+  position: absolute;
+  left: 1700px;
+  bottom: 10px;
+  scale: 1;
+}
+.tContainer:nth-of-type(14) {
+  position: absolute;
+  left: 1800px;
+  bottom: 100px;
+  scale: 2;
+}
+
+/* =============================================
+   Outside Post / Sign
+   ============================================= */
+.PoContainer {
+  position: absolute;
+  border: var(--border-Delete);
+  height: 600px;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  z-index: 1;
+  scale: 0.5;
+  bottom: -80px;
+  left: calc(50% - 400px);
+}
+
+.bottompost {
+  width: 100px;
+  height: 25px;
+  background: linear-gradient(to right, #cfb9bb 80%, #927a88 0%);
+}
+
+.middlepost {
+  position: absolute;
+  width: 20px;
+  height: 350px;
+  background: linear-gradient(to right, #d7cad3 15%, #c1a1ac 0%);
+  bottom: 0px;
+  z-index: -1;
+}
+
+.topPost {
+  position: absolute;
+  width: 200px;
+  height: 120px;
+  background: linear-gradient(to right, #fa747d 7%, #a75a62 0%);
+  top: 130px;
+}
+
+.GreentopPost {
+  position: absolute;
+  width: 150px;
+  height: 100px;
+  border-radius: 50%;
+  background: #ced69b;
+  left: 100px;
+  top: 50px;
+}
+
+.GreentopPost::before {
+  position: absolute;
+  content: "";
+  width: 150px;
+  height: 100px;
+  border-radius: 50%;
+  background: #889172;
+  left: 10px;
+}
+
+.GreentopPost h3 {
+  position: absolute;
+  right: 10px;
+  top: 30px;
+  color: #d1cbb9;
+  font-size: 2rem;
+  text-shadow: none;
+}
+
+.YellowtopPost {
+  position: absolute;
+  width: 400px;
+  height: 350px;
+  background: #e2b476;
+  left: 10px;
+  top: -40px;
+  clip-path: polygon(50% 25%, 70% 0, 50% 100%, 30% 0);
+  z-index: -1;
+  rotate: -25deg;
+}
+
+.YellowtopPost::after {
+  position: absolute;
+  content: "";
+  width: 450px;
+  height: 450px;
+  background: #ce8930;
+  top: 0px;
+  left: -20px;
+  clip-path: polygon(50% 25%, 70% 0, 50% 100%, 30% 0);
+  rotate: 1deg;
+}
+
+.NPcontainer {
+  position: absolute;
+  top: 160px;
+  left: 115px;
+  z-index: 3;
+}
+
+.PNeonText {
+  color: #fdd679;
+  text-shadow: #e4a30a 0px 0px 5px;
+}
+
+/* =============================================
+   Small Mountains (foreground)
+   ============================================= */
+.LmContainer {
+  position: absolute;
+  border: var(--border-Delete);
+  height: 110px;
+  width: 300px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  top: calc(100% - 140px);
+  left: calc(50% - 630px);
+  scale: 0.6;
+  z-index: 10;
+}
+
+.frontMountainGrassFace {
+  position: absolute;
+  height: 10px;
+  width: 106px;
+  background: #c0de84;
+  bottom: 100px;
+  left: 103px;
+}
+
+.frontMountainGrassFace::before {
+  content: "";
+  position: absolute;
+  height: 10px;
+  width: 18px;
+  right: 0px;
+  background: #00000069;
+}
+
+.frontMountainFace {
+  height: 100px;
+  width: 150px;
+  background: #df8785;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.SideMountainFace {
+  position: absolute;
+  height: 101px;
+  width: 50px;
+  background: #9d6070;
+  clip-path: polygon(0 0, 36% 0, 100% 100%, 60% 100%);
+  right: 55px;
+}
+
+/* =============================================
+   Left Mountain Range
+   ============================================= */
+.MRangeContainer {
+  position: absolute;
+  border: var(--border-Delete);
+  height: 400px;
+  width: 1200px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  bottom: 90px;
+  right: calc(50% - 0px);
+  z-index: -10;
+}
+
+.Face {
+  height: 300px;
+  width: 350px;
+  background: #dbafb2;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.FaceShadow {
+  position: relative;
+  height: 300px;
+  width: 350px;
+  background: #a77c8b;
+  clip-path: polygon(10% 0, 50% 0, 74% 100%, 30% 100%);
+  left: 200px;
+}
+
+.Face1 {
+  position: absolute;
+  height: 200px;
+  width: 300px;
+  left: 300px;
+  background: #e6a4a6;
+}
+
+.Face1 .FaceShadow {
+  clip-path: polygon(10% 0, 50% 0, 74% 100%, 30% 100%);
+  left: 150px;
+  background: #b28693;
+}
+
+.Face1 .OvercastShadow {
+  position: absolute;
+  clip-path: polygon(0 0, 30% 100%, 100% 100%);
+  height: 100px;
+  width: 50px;
+  top: 100px;
+  left: 80px;
+  background: #b98e9b;
+}
+
+.Face2 {
+  position: absolute;
+  height: 200px;
+  width: 200px;
+  right: 400px;
+  background: #eba7a9;
+  z-index: 3;
+}
+
+.Face2 .FaceShadow {
+  clip-path: polygon(10% 0, 50% 0, 74% 100%, 30% 100%);
+  left: 80px;
+  background: #ae8597;
+}
+
+.Face3 {
+  position: absolute;
+  background: #e6a4a6;
+  height: 350px;
+  width: 300px;
+  left: 100px;
+  bottom: 0px;
+  z-index: -1;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.Face3 .FaceShadow {
+  height: 350px;
+  clip-path: polygon(10% 0, 50% 0, 74% 100%, 30% 100%);
+  left: 150px;
+}
+
+.Face4 {
+  position: absolute;
+  background: #e6a4a6;
+  height: 200px;
+  width: 200px;
+  right: 250px;
+  top: 250px;
+  z-index: 2;
+  clip-path: polygon(10% 0, 50% 0, 90% 100%, 20% 100%);
+}
+
+.Face4 .FaceShadow {
+  height: 200px;
+  clip-path: polygon(13% 0, 50% 0, 90% 100%, 25% 100%);
+  background: #976b78;
+  left: 25px;
+}
+
+.Face4 .OvercastShadow {
+  position: absolute;
+  clip-path: polygon(0 0, 30% 100%, 100% 100%);
+  height: 155px;
+  width: 50px;
+  top: 0px;
+  left: 20px;
+  background: #976b78;
+}
+
+.Face5 {
+  position: absolute;
+  background: #fac8c8;
+  height: 100px;
+  width: 400px;
+  left: 0px;
+  bottom: 0px;
+  clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+  z-index: 2;
+}
+
+.Face5 .FaceShadow {
+  height: 100px;
+  clip-path: polygon(25% 0, 50% 0, 74% 100%, 30% 100%);
+  left: 250px;
+  background: #be909e;
+}
+
+.Face6 {
+  position: absolute;
+  background: linear-gradient(to right, #e8a3a6 84%, #7a5862 0%);
+  height: 100px;
+  width: 200px;
+  right: 150px;
+  bottom: -50px;
+  clip-path: none;
+}
+
+/* =============================================
+   Right Mountain Range
+   ============================================= */
+.RMRangeContainer {
+  position: absolute;
+  border: var(--border-Delete);
+  height: 400px;
+  width: 1200px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+  bottom: 90px;
+  left: calc(50% - 0px);
+  z-index: -10;
+}
+
+.RFace {
+  position: absolute;
+  height: 300px;
+  width: 350px;
+  background: #fdb5b7;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+  right: 0px;
+}
+
+.RFaceShadow {
+  position: relative;
+  height: 300px;
+  width: 350px;
+  background: #a77c8b;
+  clip-path: polygon(10% 0, 50% 0, 74% 100%, 30% 100%);
+  left: 200px;
+}
+
+.RFace1 {
+  position: absolute;
+  height: 200px;
+  width: 300px;
+  right: 240px;
+  background: #f8bcbc;
+  z-index: 1;
+}
+
+.RFace1 .RFaceShadow {
+  clip-path: polygon(10% 0, 50% 0, 74% 100%, 30% 100%);
+  left: 150px;
+  background: #b28693;
+}
+
+.RFace1 .OvercastShadow {
+  position: absolute;
+  clip-path: polygon(0 0, 30% 100%, 100% 100%);
+  height: 100px;
+  width: 50px;
+  top: 100px;
+  right: 80px;
+  background: #b98e9b;
+}
+
+.RFace2 {
+  position: absolute;
+  background: #e6a4a6;
+  height: 450px;
+  width: 300px;
+  right: 400px;
+  top: 10px;
+  z-index: -1;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.RFace2 .RFaceShadow {
+  height: 450px;
+  clip-path: polygon(10% 0, 50% 0, 74% 100%, 30% 100%);
+  left: 150px;
+}
+
+.RFace3 {
+  position: absolute;
+  background: #e6a4a6;
+  height: 350px;
+  width: 300px;
+  right: 100px;
+  bottom: 100px;
+  z-index: -1;
+  clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
+}
+
+.RFace3 .RFaceShadow {
+  height: 350px;
+  clip-path: polygon(10% 0, 50% 0, 74% 100%, 30% 100%);
+  left: 150px;
+}
+
+.RFace4 {
+  position: absolute;
+  height: 200px;
+  width: 300px;
+  right: 550px;
+  background: #fdb5b7;
+  z-index: 1;
+}
+
+.RFace4 .RFaceShadow {
+  clip-path: polygon(10% 0, 50% 0, 74% 100%, 30% 100%);
+  left: 150px;
+  background: #b28693;
+}
+
+.RFace5 {
+  position: absolute;
+  background: #fac8c8;
+  height: 100px;
+  width: 400px;
+  right: 350px;
+  bottom: 0px;
+  clip-path: polygon(5% 0%, 95% 0%, 100% 100%, 0% 100%);
+  z-index: 2;
+}
+
+.RFace5 .RFaceShadow {
+  height: 100px;
+  clip-path: polygon(25% 0, 50% 0, 74% 100%, 30% 100%);
+  left: 250px;
+  background: #be909e;
+}
+
+.RFace5 .OvercastShadow {
+  position: absolute;
+  clip-path: polygon(0 0, 0% 100%, 70% 100%);
+  height: 50px;
+  width: 40px;
+  bottom: 0px;
+  left: 53px;
+  background: #b98e9b;
+}
+
+.RFace6 {
+  position: absolute;
+  background: linear-gradient(to right, #e8a3a6 84%, #7a5862 0%);
+  height: 100px;
+  width: 200px;
+  left: 300px;
+  bottom: -50px;
+  z-index: 2;
+  clip-path: none;
+}
+
+/* =============================================
+   Animations
+   ============================================= */
+@keyframes Wheelmove {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes sirenlightRedBeam {
+  0% {
+    box-shadow: 0px 0px 20px 10px red;
+  }
+  100% {
+    box-shadow: 0px 0px 20px 1px red;
+  }
+}
+
+@keyframes sirenlightBlueBeam {
+  0% {
+    box-shadow: 0px 0px 20px 10px blue;
+  }
+  100% {
+    box-shadow: 0px 0px 20px 1px blue;
+  }
+}
+
+@keyframes Civ-Vehicle-Move {
+  0%,
+  100% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(6000px);
+  }
+}
