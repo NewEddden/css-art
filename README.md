@@ -6,7 +6,7 @@ A fully hand-built CSS illustration of a retro diner scene at dusk. No canvas, n
 
 ## 📸 Preview
 
-![DinnerWorld Preview](../preview.png)
+![DinnerWorld Preview](preview.png)
 
 ---
 
