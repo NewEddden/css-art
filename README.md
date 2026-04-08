@@ -6,7 +6,7 @@ A fully hand-built CSS illustration of a retro diner scene at dusk. No canvas, n
 
 ## 📸 Preview
 
-> A neon-lit diner sits between two mountain ranges under a warm gradient sky. Palm trees line the road. Three vehicles patrol the street — a civilian car, a police cruiser with animated siren lights, and a player-controlled ice cream van.
+![DinnerWorld Preview](../preview.png)
 
 ---
 
